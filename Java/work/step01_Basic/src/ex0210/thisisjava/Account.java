@@ -1,37 +1,40 @@
 package ex0210.thisisjava;
 
 public class Account {
-	
-	String ano;
-	String owner;
-	int balance;
+    private String ano;
+    private String owner;
+    private int balance;
 
-	public String getAno() {
-		return ano;
-	}
+    public Account(String ano, String owner, int balance) {
+        this.ano = ano;
+        this.owner = owner;
+        this.balance = balance;
+    }
 
-	public void setAno(String ano) {
-		this.ano = ano;
-	}
+    public String getAno() {
+        return ano;
+    }
 
-	public String getOwner() {
-		return owner;
-	}
+    public String getOwner() {
+        return owner;
+    }
 
-	public void setOwner(String owner) {
-		this.owner = owner;
-	}
+    public int getBalance() {
+        return balance;
+    }
 
-	public int getBalance() {
-		return balance;
-	}
+    public void deposit(int amount) {
+        if (amount > 0) {
+            balance += amount;
+        }
+    }
 
-	public void setBalance(int balance) {
-		this.balance = balance;
-	}
-
-	public Account(String ano, String owner, int balance) {
-		
-	}
-
+    public boolean withdraw(int amount) {
+        if (amount > 0 && balance >= amount) {
+            balance -= amount;
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
