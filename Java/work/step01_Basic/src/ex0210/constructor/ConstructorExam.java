@@ -13,7 +13,8 @@ class Puppy{
 		*/	
 	public void printPuppyName() {
 		System.out.println("public void printPuppyName() 호출되었습니다!");
-		System.out.println("이름: " + name);
+		//this. 생략 가능
+		System.out.println("이름: " + this.name);
         System.out.println("나이: " + age);
 	}
 		
@@ -27,9 +28,10 @@ class Puppy{
 		*/
 	public Puppy() {
         System.out.println("생성자 public Puppy() 호출되었습니다!");
+        //this. 생략 가능
+        this.printPuppyName();
         name = "메리";
-        age = -98998;
-        printPuppyName();
+        this.age = -98998;
     }
 }
 
@@ -37,10 +39,10 @@ public class ConstructorExam{
 	//메인메소드에서
 	public static void main(String [] agrs){
 		//Puppy객체 생성
-		Puppy puppy = new Puppy();
+		Puppy p = new Puppy(); //new 하면 자동으로 생성자로 감
 		
 		//Puppy객체의 printPuppyName메소드 호출
-		puppy.printPuppyName();
+		p.printPuppyName();
 	}
 }
 			
