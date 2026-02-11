@@ -15,22 +15,22 @@ class Car{
 
 class EfSonata extends Car {
 	public EfSonata() {
-		this.carname = "Rambo";
-		this.cost = 4000000;
+		this.carname = "EfSonata";
+		super.cost = 3500;
 	}
 }
 
 class Excel extends Car {
 	public Excel() {
-		this.carname = "ferari";
-		this.cost = 1000000;
+		this.carname = "Excel";
+		this.cost = 100;
 	}
 }
 
 class Carnival extends Car {
 	public Carnival() {
-		this.carname = "Benzz";
-		this.cost = 300000;
+		this.carname = "Carnival";
+		this.cost = 4000;
 	}
 }
 	
@@ -41,7 +41,17 @@ public class InheritanceExam{
 	
 		//Car, EfSonata, Excel, Carnival 네개의 객체를 생성
 		// 각 클래스에서 Car calss에있는 printAttributes()메소드를 호출할수있다.
+	public static void main(String[] args) {
+		Car car = new Car();
+		EfSonata ef = new EfSonata();
+		Excel ex = new Excel();
+		Carnival c = new Carnival();
 		
-	
+		car.printAttributes();
+		ef.printAttributes();
+		ex.printAttributes();
+		c.printAttributes();
+		
+	}
 }
 
