@@ -18,6 +18,10 @@ public class MemberService {
 		} else {
 			return false;
 		}
+		
+//		if("hong".equals(id) && "12345".equals(password)) {
+//			
+//		}
 	}
 	
 	public void logout(String id) {
