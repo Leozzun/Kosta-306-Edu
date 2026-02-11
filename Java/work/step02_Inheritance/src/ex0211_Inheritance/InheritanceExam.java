@@ -14,6 +14,7 @@ class Car{
 	//각 클래스의 생성자의 구현부에서 carname과 cost에 적당한 값 할당
 
 class EfSonata extends Car {
+	int i =10;
 	public EfSonata() {
 		this.carname = "EfSonata";
 		super.cost = 3500;
@@ -28,7 +29,7 @@ class Excel extends Car {
 }
 
 class Carnival extends Car {
-	public Carnival() {
+	public Carnival() { 
 		this.carname = "Carnival";
 		this.cost = 4000;
 	}
