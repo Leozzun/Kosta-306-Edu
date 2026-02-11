@@ -1,4 +1,4 @@
-package ex0211.final_field;
+package ex0211.final_field;     
 
 public class FinalFieldExam {
 	int i; // 인스턴스 필드

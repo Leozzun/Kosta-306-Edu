@@ -19,6 +19,6 @@ public class ShopService {
 		} else {
 			System.out.println("다른 ShopService 객체입니다.");
 		}
-	}
+	}  
 }
     
