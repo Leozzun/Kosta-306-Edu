@@ -82,5 +82,9 @@ public class Employee {
     public String toString() {
         return empNo + " | " + eName + " | " + job + " | " + mgr +
                " | " + hiredate + " | " + deptName;
+        
+//        StringBuilder builder = new StringBuilder();
+//        builder.append("Employee"); ....
+//        return builder.toString();
     }
 }

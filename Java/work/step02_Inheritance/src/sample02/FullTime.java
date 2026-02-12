@@ -40,5 +40,12 @@ public class FullTime extends Employee {
     @Override
     public String toString() {
         return super.toString() + " | " + salary + " | " + bonus;
+//      StringBuilder sb = new StringBuilder();
+//      sb.append(super.toString());
+//      sb.append(", salary=");
+//      sb.append(salary);
+//      sb.append(", bonus=");
+//      sb.append(bonus);
+        
     }
 }

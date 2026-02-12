@@ -29,6 +29,10 @@ public class MainApp {
         for (int i = 0; i < part.length; i++) {
             System.out.println(part[i]);
         }
+        
+//       for (Employee employee : emp) { //부모타입이라도 재정의된 메소드는 재정의된 메소드가 호출된다 
+//    	   System.out.println(employee); //employee.toString() 호출 
+//       }
 
         System.out.println();
         System.out.println("*************** Emp Message 정보 ***************");
@@ -40,6 +44,10 @@ public class MainApp {
         for (int i = 0; i < part.length; i++) {
             part[i].message();
         }
+        
+//        for (Employee employee : emp) { //부모타입이라도 재정의된 메소드는 재정의된 메소드가 호출된다 
+//        	employee.message();
+//        }
 		
 	}
 
