@@ -14,9 +14,10 @@ public class ClientChatExam {
 	public ClientChatExam() {
 		try {
 			Socket sk = new Socket("192.168.0.34", 8001);
+			System.out.println(sk.getInetAddress().toString()+"님과 대화 시작합니다.");
 			
 			//보내는 스레드(전송=출력)
-			new SendThread(sk, "[CLIENT]").start();
+			new SendThread(sk, "[개발자]").start();
 			
 			//받는 스레드 (읽기)
 			new Thread(()->{
