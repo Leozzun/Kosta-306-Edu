@@ -18,13 +18,17 @@ public class ConstructorReference01 {
 	};
 	
 	 //1. 람다식으로 변경해보자
+	Supplier<Person> beforePerson2 =()-> new Person();
 	 
 
      //2. 생성자참조로 변경해보자	
+	Supplier<Person> beforePerson3 = Person :: new;
 	 
  
 	 //3.호출해보자
-	
+	Person p1 = beforePerson.get();
+	Person p2 = beforePerson2.get();
+	Person p3 = beforePerson3.get();
 	
     }
 }

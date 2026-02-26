@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Predicate;
 
 
 public class Test00 {
@@ -49,9 +50,27 @@ public class Test00 {
 		}
 		
 		////////////////////////////////////////////////////////
-		
+		System.out.println("===================");
 	   //2.Stream이용방식으로 해보자
+//		List<Student> finalList = students.stream()
+//		.filter(new Predicate<Student>() {
+//			public boolean test(Student t) {
+//				System.out.println(1);
+//				return t.getScore() >=80;
+//			}
+//		}).toList();
 		
+		List<String> finalList = students
+				.stream()
+				.filter((s)-> s.getScore() >= 80)
+//				.sorted(Comparator.comparingDouble((s)-> s.getScore()))
+				.sorted(Comparator.comparingDouble(Student :: getScore))
+//				.map((s) -> s.getName())
+				.map(Student :: getName)
+				.toList();
+		
+		System.out.println("개수 = " + finalList.size());
+		System.out.println(finalList);
 	
 	}
 
