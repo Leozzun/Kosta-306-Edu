@@ -20,7 +20,7 @@ public class Test05 {
         
          String st = students.stream()
         		.map(Student :: getName)
-        		.collect(Collectors.joining(","));
+        		.collect(Collectors.joining(", "));
         		
          System.out.println(st);
 
