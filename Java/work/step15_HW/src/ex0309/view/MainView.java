@@ -13,7 +13,7 @@ public class MainView {
 		StudentTeacherDAO dao = new StudentTeacherDAOImpl();
 		System.out.println("1.성별이 여자인 학생정보 --------------");
 		List<Student> list = dao.getGenderByWomen();
-		for(Student st:list) {
+		for(Student st:list) {	
 			System.out.println(st);
 		}
 		
