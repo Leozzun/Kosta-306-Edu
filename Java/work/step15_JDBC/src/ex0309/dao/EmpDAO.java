@@ -1,11 +1,15 @@
 package ex0309.dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import ex0309.db.util.DbManager;
+import ex0309.dto.Emp;
 
 public class EmpDAO {
 	/**
@@ -21,11 +25,13 @@ public class EmpDAO {
 				con = DbManager.getConnection();
 				
 				st = con.createStatement();
-				rs = st.executeQuery("select ename from emp");
+				rs = st.executeQuery("select ename, sal from emp");
 				while(rs.next()) {
 					//열을 조회
 					String ename = rs.getString(1);
+					//int sal = rs.getInt(1);
 					System.out.println(ename);
+					//System.out.println(sal);
 				}
 			
 		} catch (SQLException e) {
@@ -34,4 +40,155 @@ public class EmpDAO {
 			DbManager.dbClose(con, st, rs);
 		}
 	}
+	
+	public void insert(Emp emp) {
+		Connection con = null;
+		Statement st = null;
+		
+		String sql="insert into emp(empno, ename, sal, hiredate) "
+				+ "values("+ emp.getEmpno() +","+emp.getEname()+","+emp.getSal()+", now())";
+		try {
+			con = DbManager.getConnection();
+			st = con.createStatement();
+			int re = st.executeUpdate(sql);
+			
+			System.out.println("re = " + re);
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			DbManager.dbClose(con, st);
+		}
+	}
+	
+	public void preParedinsert(Emp emp) { //sql injection 공격
+		Connection con = null;
+		PreparedStatement ps = null;
+		
+		String sql="insert into emp(empno, ename, sal, hiredate) values(?,?,?, now())";
+		try {
+			con = DbManager.getConnection();
+			
+			ps = con.prepareStatement(sql);
+			
+			//?의 순서대로 개수만큼 seXxx( ?순서, 값) 필요하다 
+			ps.setInt(1, emp.getEmpno());
+			ps.setString(2, emp.getEname());
+			ps.setInt(3, emp.getSal());
+			
+			int re = ps.executeUpdate();
+			
+			System.out.println("re = " + re);
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			DbManager.dbClose(con, ps);
+		}
+	}
+	
+	/**
+	 *  사원 전체 검색하기
+	 * 	select empno, ename, sal, hiredate from emp
+	 */
+	public List<Emp> selectAll() {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+	
+		String sql = "select empno, ename, sal, hiredate from emp";
+		List<Emp> list = new ArrayList<Emp>();
+		try {
+				//로드 연결 실행 닫기 
+				con = DbManager.getConnection();
+				ps = con.prepareStatement(sql);
+				rs = ps.executeQuery();
+			
+				while(rs.next()) {
+					int empno = rs.getInt("empno");
+					String ename = rs.getString("ename");
+					int sal = rs.getInt("sal");
+					String hiredate = rs.getString("hiredate");
+					Emp emp = new Emp(empno, ename, sal, hiredate);
+					list.add(emp);
+				}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DbManager.dbClose(con, ps, rs);
+		}
+		
+		return list;
+	}
+	
+	/**
+	 *  사원번호에 해당하는 사원정보 검색하기 
+	 *  select empno, ename, sal, hiredate from emp where empno=?
+	 */
+	public Emp selectByEmp(int empno) { //9000
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+	
+		String sql = "select empno, ename, sal, hiredate from emp where empno = ?";
+		Emp emp = null;
+		try {
+				//로드 연결 실행 닫기 
+				con = DbManager.getConnection();
+				ps = con.prepareStatement(sql);
+				
+				ps.setInt(1, empno);
+				
+				rs = ps.executeQuery();
+			
+				// 조건식 쿼리는 if문을 사용한다. while 써도됨 
+				if(rs.next()) {
+					empno = rs.getInt("empno");
+					String ename = rs.getString("ename");
+					int sal = rs.getInt("sal");
+					String hiredate = rs.getString("hiredate");
+					
+					emp = new Emp(empno, ename, sal, hiredate);
+				}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DbManager.dbClose(con, ps, rs);
+		}
+		
+		return emp;
+	}
+	
+	/**
+	 *  사원번호에 해당하는 사원 삭제하기 
+	 *  delete from emp where empno=?
+	 */
+	public int deleteByEmpno(int empno) {
+		Connection con = null;
+		PreparedStatement ps = null;
+		int result = 0;
+	
+		String sql = "delete from emp where empno = ?";
+		
+		try {
+				//로드 연결 실행 닫기 
+				con = DbManager.getConnection();
+				ps = con.prepareStatement(sql);
+				
+				//?의 순서대로 개수만큼
+				ps.setInt(1, empno);
+				
+				result = ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DbManager.dbClose(con, ps);
+		}
+		
+		return result;
+	}
+	
 }
