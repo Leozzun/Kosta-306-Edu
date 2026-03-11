@@ -148,14 +148,12 @@ public class StudentTeacherDAOImpl implements StudentTeacherDAO {
 		try {
 				//로드 연결 실행 닫기 
 				con = DbManager.getConnection();
-				ps = con.prepareStatement(sql);
 				
+				ps = con.prepareStatement(sql);
 				vw = ps.executeUpdate();
 				
 				ps = con.prepareStatement(sql2);
-				
 				ps.setInt(1, teacherNo);
-				
 				rs = ps.executeQuery();
 			
 				// 조건식 쿼리는 if문을 사용한다. while 써도됨 
